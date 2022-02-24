@@ -33,35 +33,13 @@ const initialState = {
   books: [], // array of books
 };
 
-export default function reducer(state = initialState, action) {
+export default function booksReducer(state = initialState, action) {
   switch (action.type) {
     case "books/add":
-      return {
-        ...state,
-        books: [...state.books, action.payload],
-      };
+      return [...state, action.payload];
 
     case "books/remove":
-      const newBooks = state.books.filter((book) => book.id !== action.payload);
-      return {
-        ...state,
-        books: newBooks,
-      };
-
-    case "authors/add":
-      return {
-        ...state,
-        authors: [...state.authors, action.payload],
-      };
-
-    case "authors/remove":
-      const newAuthors = state.authors.filter(
-        (author) => author.id !== action.payload
-      );
-      return {
-        ...state,
-        authors: newAuthors,
-      };
+      return state.filter((book) => book.id !== action.payload);
 
     default:
       return state;
